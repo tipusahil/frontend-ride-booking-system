@@ -1,0 +1,4 @@
+bun create vite -> project setup and run dile  node_modules soho install kore setup dibe, and run korbe.
+2. bun add react-router react-hook-form -> react-rotuer (data mode e giye install kora) 
+3. bun add tailwindcss @tailwindcss/vite -> tailwindcss setup by shadcn-ui
+4. bunx --bun shadcn@latest init 
