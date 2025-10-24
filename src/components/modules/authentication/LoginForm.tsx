@@ -15,6 +15,7 @@ import { cn } from "@/lib/utils";
 import { useLoginMutation } from "@/redux/features/auth/auth.api";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { LogIn } from "lucide-react";
 import { useForm } from "react-hook-form";
 
 import { Link, useNavigate } from "react-router";
@@ -148,6 +149,7 @@ const navigate = useNavigate();
               type="submit"
               className="w-full text-foreground  cursor-pointer"
             >
+               <LogIn className="mr-2 h-4 w-4" />
               Login
             </Button>
           </form>

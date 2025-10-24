@@ -1,4 +1,4 @@
-import { Header } from '@/components/header-3';
+import { Header } from '@/components/header_advance';
 
 export default function Demo() {
 	return (

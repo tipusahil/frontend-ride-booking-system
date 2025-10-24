@@ -21,8 +21,9 @@ import { cn } from "@/lib/utils";
 import { useRegisterMutation } from "@/redux/features/auth/auth.api";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Send } from "lucide-react";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 import { z } from "zod";
 
@@ -57,6 +58,7 @@ export function RegisterForm({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   const [register] = useRegisterMutation();
+  const navigate = useNavigate();
 
   // ✅ form setup
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -98,6 +100,7 @@ export function RegisterForm({
 if(result.success) {
         toast.success(result?.message || "User created successfully");
       console.log(result);
+      navigate("/");
 }
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     }catch (error:any) {
@@ -242,6 +245,7 @@ if(result.success) {
             {/* Submit */}
             <Button type="submit" className="w-full cursor-pointer">
               Submit
+              <Send className="mr-2 h-4 w-4" />
             </Button>
           </form>
         </Form>

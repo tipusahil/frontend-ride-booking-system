@@ -1,6 +1,6 @@
 import { baseApi } from "@/redux/baseApi";
 
-const authApi = baseApi.injectEndpoints({
+export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     register: builder.mutation({
       query: (userInfo) => ({
@@ -9,6 +9,7 @@ const authApi = baseApi.injectEndpoints({
         data: userInfo,// baseApi.ts file (baseQuery: axiosBaseQuery_fromRedux()) eta use kore data key er maddome data backend e patate hoi, ar redux er ( baseQuery: fetchBaseQuery({baseUrl: config.baseUrl}) )  eta use korle (body) key er maddome data backend e patate hoi,
         // data:loginInfo // redux er builder hole data key te store korte hoi,
       }),
+      invalidatesTags:["USER"],
     }),
     // ----2.
     login: builder.mutation({
@@ -18,6 +19,7 @@ const authApi = baseApi.injectEndpoints({
         data: loginInfo, // baseApi.ts file (baseQuery: axiosBaseQuery_fromRedux()) eta use kore data key er maddome data backend e patate hoi and (withCredentials:true) dite hoi, ar redux er ( baseQuery: fetchBaseQuery({baseUrl: config.baseUrl}) )  eta use korle (body) key er maddome data backend e patate hoi,and (credentials:"include") dite hoi, 
         // data:loginInfo // redux er builder hole data key te store korte hoi,
       }),
+      invalidatesTags:["USER"],
     }),
 
     // ----3. get user data 
@@ -27,8 +29,17 @@ const authApi = baseApi.injectEndpoints({
             method:"GET",
         }),
         providesTags:["USER"],
+    }),
+
+    // ----4. logout 
+    logout: builder.mutation({
+        query: ()=> ({
+            url: "/auth/logout",
+            method:"POST",
+        }),
+        invalidatesTags: ["USER"], // ager data clear korbe.
     })
   }),
 });
 
-export const { useRegisterMutation, useLoginMutation, useGetMeOrGetUserInfoQuery } = authApi;
+export const { useRegisterMutation, useLoginMutation, useGetMeOrGetUserInfoQuery, useLogoutMutation } = authApi;
