@@ -1,9 +1,6 @@
 "use client";
-import React from "react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 import { MenuToggleIcon } from "@/components/menu-toggle-icon";
-import { createPortal } from "react-dom";
+import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,27 +9,33 @@ import {
   NavigationMenuList,
   NavigationMenuTrigger,
 } from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
+import React from "react";
+import { createPortal } from "react-dom";
 
-import {
-  CodeIcon,
-  GlobeIcon,
-  LayersIcon,
-  UserPlusIcon,
-  Users,
-  Star,
-  FileText,
-  Shield,
-  RotateCcw,
-  Handshake,
-  Leaf,
-  HelpCircle,
-  BarChart,
-  PlugIcon,
-  type LucideIcon,
-} from "lucide-react";
 import Logo from "@/assets/icons/Logo";
 import { AnimatedThemeToggler } from "@/providers/theme-provider";
+import {
+  BadgeInfo,
+  BarChart,
+  CodeIcon,
+  FileText,
+  GlobeIcon,
+  Handshake,
+  HelpCircle,
+  HomeIcon,
+  LayersIcon,
+  Leaf,
+  PlugIcon,
+  RotateCcw,
+  Shield,
+  Star,
+  UserPlusIcon,
+  Users,
+  type LucideIcon,
+} from "lucide-react";
 import { Link } from "react-router";
+import { useGetMeOrGetUserInfoQuery } from "@/redux/features/auth/auth.api";
 
 type LinkItem = {
   title: string;
@@ -44,6 +47,17 @@ type LinkItem = {
 export function Header() {
   const [open, setOpen] = React.useState(false);
   const scrolled = useScroll(10);
+const { data, isLoading, isError, isSuccess } = useGetMeOrGetUserInfoQuery(undefined);
+
+React.useEffect(() => {
+  if (isSuccess && data) {
+    console.log("User Data:", data);
+  } else if (isError) {
+    console.log("Error fetching user");
+  } else if (isLoading) {
+    console.log("Loading user...");
+  }
+}, [data, isLoading, isError, isSuccess]);
 
   React.useEffect(() => {
     if (open) {
@@ -101,7 +115,7 @@ export function Header() {
                   </ul>
                   <div className="p-2">
                     <p className="text-muted-foreground text-sm">
-                      Interested?  
+                      Interested?
                       <Link
                         to="#"
                         className="text-foreground font-medium hover:underline"
@@ -147,27 +161,28 @@ export function Header() {
         </div>
         <div className="hidden items-center gap-2 md:flex">
           <Button>
-            <Link to={"/login"}>Login</Link>  
+            <Link to={"/login"}>Login</Link>
           </Button>
           {/* <Button variant="outline">
             <Link to={"/login"}>Get Started</Link>  
           </Button> */}
-        
-          <div className="hover:bg-foreground/10 border rounded-md">
-            <AnimatedThemeToggler />
-          </div>
+
+          <AnimatedThemeToggler />
         </div>
-        <Button
-          size="icon"
-          variant="outline"
-          onClick={() => setOpen(!open)}
-          className="md:hidden"
-          aria-expanded={open}
-          aria-controls="mobile-menu"
-          aria-label="Toggle menu"
-        >
-          <MenuToggleIcon open={open} className="size-5" duration={300} />
-        </Button>
+        <div className="  md:hidden space-x-1.5  flex justify-center items-center">
+          <AnimatedThemeToggler />
+          <Button
+            size="icon"
+            variant="outline"
+            onClick={() => setOpen(!open)}
+            className="md:hidden"
+            aria-expanded={open}
+            aria-controls="mobile-menu"
+            aria-label="Toggle menu"
+          >
+            <MenuToggleIcon open={open} className="size-5" duration={300} />
+          </Button>
+        </div>
       </nav>
       <MobileMenu
         open={open}
@@ -175,7 +190,13 @@ export function Header() {
       >
         <NavigationMenu className="max-w-full">
           <div className="flex w-full flex-col gap-y-2">
-            <span className="text-sm">Product</span>
+            {/* ----start-my custom route----- */}
+            <span className="text-sm ">Quick Links</span>
+            {QuickLinks.map((link) => (
+              <ListItem key={link.title} {...link} />
+            ))}
+            {/* -----end---my custom route----- */}
+            <span className="text-sm ">Product</span>
             {productLinks.map((link) => (
               <ListItem key={link.title} {...link} />
             ))}
@@ -188,8 +209,8 @@ export function Header() {
             ))}
           </div>
         </NavigationMenu>
-        <div className="flex flex-col gap-2">
-          <Button variant="outline" className="w-full bg-transparent">
+        <div className="flex flex-col  gap-2">
+          <Button variant="outline" className="w-full  bg-transparent">
             Sign In
           </Button>
           <Button className="w-full">Get Started</Button>
@@ -202,7 +223,6 @@ export function Header() {
 type MobileMenuProps = React.ComponentProps<"div"> & {
   open: boolean;
 };
-
 function MobileMenu({ open, children, className, ...props }: MobileMenuProps) {
   if (!open || typeof window === "undefined") return null;
 
@@ -210,20 +230,23 @@ function MobileMenu({ open, children, className, ...props }: MobileMenuProps) {
     <div
       id="mobile-menu"
       className={cn(
-        "bg-background/95 supports-[backdrop-filter]:bg-background/50 backdrop-blur-lg",
-        "fixed top-14 right-0 bottom-0 left-0 z-40 flex flex-col overflow-hidden border-y md:hidden"
+        "bg-background/95  supports-[backdrop-filter]:bg-background/50 backdrop-blur-lg",
+        "fixed top-14 right-0 bottom-0 left-0 z-40 flex flex-col overflow-hidden border-y md:hidden  "
       )}
     >
       <div
         data-slot={open ? "open" : "closed"}
         className={cn(
-          "data-[slot=open]:animate-in data-[slot=open]:zoom-in-97 ease-out",
+          "data-[slot=open]:animate-in  data-[slot=open]:zoom-in-97 ease-out",
           "size-full p-4",
           className
         )}
         {...props}
       >
-        {children}
+        <div className="">
+          {/* {myLinks} */}
+          {children}
+        </div>
       </div>
     </div>,
     document.body
@@ -259,6 +282,23 @@ function ListItem({
     </NavigationMenuLink>
   );
 }
+
+// ---------my custom --------------
+const QuickLinks: LinkItem[] = [
+  {
+    title: "Home",
+    href: "/",
+    // description: "Create responsive websites with ease",
+    icon: HomeIcon,
+  },
+  {
+    title: "About",
+    href: "/about",
+    // description: "Create responsive websites with ease",
+    icon: BadgeInfo,
+  },
+];
+// ---------my custom --------------
 
 const productLinks: LinkItem[] = [
   {

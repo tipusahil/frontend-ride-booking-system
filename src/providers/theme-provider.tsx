@@ -8,6 +8,7 @@ import { Laptop, Moon, Sun } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 // 🔹 Theme-এর জন্য type তৈরি করা হয়েছে: light, dark এবং system
 type Theme = "light" | "dark" | "system";
@@ -130,12 +131,14 @@ export const AnimatedThemeToggler = ({
   }, [theme]); // dependency হিসেবে 'theme' রাখা হয়েছে।
 
   return (
-    <button
+    <Button
+    variant={"outline"}
+    size={"icon"}
       ref={buttonRef}
       onClick={toggleTheme}
       aria-label="Switch theme"
       className={cn(
-        "flex items-center justify-center p-2 rounded-full outline-none focus:outline-none active:outline-none focus:ring-0 cursor-pointer transition-colors",
+        "flex items-center justify-center  p-1 rounded-lg outline-none focus:outline-none active:outline-none focus:ring-0 cursor-pointer transition-colors",
         className
       )}
       type="button"
@@ -145,7 +148,7 @@ export const AnimatedThemeToggler = ({
         {theme === "dark" ? (
           <motion.span
             key="sun-icon"
-            initial={{ opacity: 0, scale: 0.55, rotate: 180 }}
+            initial={{ opacity: 0, scale: 0.55, rotate: 360 }}
             animate={{ opacity: 1, scale: 1, rotate: 0 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.33 }}
@@ -179,6 +182,6 @@ export const AnimatedThemeToggler = ({
           </motion.span>
         )}
       </AnimatePresence>
-    </button>
+    </Button>
   );
 };
