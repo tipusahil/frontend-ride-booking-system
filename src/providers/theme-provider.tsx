@@ -3,12 +3,12 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { flushSync } from "react-dom";
 
-import { Laptop, Moon, Sun } from "lucide-react";
+import { Laptop, Sun } from "lucide-react";
 // 🔹 Laptop icon যুক্ত করা হয়েছে System Theme টগল করার জন্য।
-
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { AnimatePresence, motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
+import { RiMoonClearFill } from "react-icons/ri";
 
 // 🔹 Theme-এর জন্য type তৈরি করা হয়েছে: light, dark এবং system
 type Theme = "light" | "dark" | "system";
@@ -165,7 +165,7 @@ export const AnimatedThemeToggler = ({
             transition={{ duration: 0.33 }}
             className="text-black" // Light থিমে আইকনের রঙ কালো
           >
-            <Moon />
+           <RiMoonClearFill/>
           </motion.span>
         ) : (
           <motion.span

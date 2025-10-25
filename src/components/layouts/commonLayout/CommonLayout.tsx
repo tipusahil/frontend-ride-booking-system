@@ -5,12 +5,19 @@ import Navbar from "./Navbar";
 interface IProps {
   children: ReactNode;
 }
+
 const CommonLayout = ({ children }: IProps) => {
-  // const CommonLayout = ({children}:{children:React.ReactNode}) => {
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
+      {/* Navbar always at top */}
       <Navbar />
-      {children}
+
+      {/* Main grows to fill the space between Navbar and Footer */}
+      <main className="flex-1 border-2 border-green-500">
+        {children}
+      </main>
+
+      {/* Footer always at bottom */}
       <Footer />
     </div>
   );

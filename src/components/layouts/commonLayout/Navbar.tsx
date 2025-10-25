@@ -5,7 +5,7 @@ export default function Demo() {
 		<div className="w-full">
 			<Header />
 
-			<main className="mx-auto min-h-screen w-full max-w-3xl px-4 py-12">
+			{/* <main className="mx-auto min-h-screen w-full max-w-3xl px-4 py-12">
 				<div  className="space-y-2 mb-4">
 					<div className="bg-accent h-6 w-4/6 rounded-md border" />
 					<div className="bg-accent h-6 w-1/2 rounded-md border" />
@@ -23,7 +23,7 @@ export default function Demo() {
 						<div className="bg-accent h-4 w-1/2 rounded-md border" />
 					</div>
 				))}
-			</main>
+			</main> */}
 		</div>
 	);
 }

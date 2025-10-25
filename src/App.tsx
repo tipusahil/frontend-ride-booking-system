@@ -1,5 +1,6 @@
 import { Outlet } from "react-router"
 import CommonLayout from "./components/layouts/commonLayout/CommonLayout"
+import "@/index.css"; // বা যেই path তুমি ব্যবহার করছো
 
 function App() {
   return (

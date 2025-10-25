@@ -42,6 +42,8 @@ import {
   Users,
   type LucideIcon,
 } from "lucide-react";
+import { FcFaq } from "react-icons/fc";
+import { HiOutlineStar } from "react-icons/hi";
 import { Link, useNavigate } from "react-router";
 import { toast } from "sonner";
 
@@ -51,6 +53,7 @@ type LinkItem = {
   icon: LucideIcon;
   description?: string;
 };
+
 
 // =================================================================================================
 // Header Component
@@ -208,6 +211,21 @@ export function Header() {
       <NavigationMenuLink className="px-4" asChild>
         <Link to={"/about"} className="hover:bg-accent rounded-md p-2">
           About
+        </Link>
+      </NavigationMenuLink>
+      <NavigationMenuLink className="px-4" asChild>
+        <Link to={"/about"} className="hover:bg-accent rounded-md p-2">
+           Features
+        </Link>
+      </NavigationMenuLink>
+      <NavigationMenuLink className="px-4" asChild>
+        <Link to={"/about"} className="hover:bg-accent rounded-md p-2">
+            Contact
+        </Link>
+      </NavigationMenuLink>
+      <NavigationMenuLink className="px-4" asChild>
+        <Link to={"/about"} className="hover:bg-accent rounded-md p-2">
+            FAQ
         </Link>
       </NavigationMenuLink>
     </>
@@ -450,6 +468,18 @@ const QuickLinks: LinkItem[] = [
     href: "/about",
     // description: "Create responsive websites with ease",
     icon: BadgeInfo,
+  },
+  {
+    title: "Features",
+    href: "/features",
+    // description: "Create responsive websites with ease",
+    icon: HiOutlineStar,
+  },
+  {
+    title: "FAQ",
+    href: "/faq",
+    // description: "Create responsive websites with ease",
+    icon: FcFaq ,
   },
 ];
 // ---------my custom --------------
